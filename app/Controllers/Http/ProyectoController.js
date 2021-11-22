@@ -1,6 +1,8 @@
 'use strict'
 
 const Proyecto = use('App/Models/Proyecto')
+const AutorizacionServices = use('App/Services/AutorizacionService')
+
 class ProyectoController {
    async index({auth}){
         const user = await auth.getUser();
@@ -15,6 +17,17 @@ class ProyectoController {
             nombre
         })
         await user.proyectos().save(proyecto);
+        return proyecto;
+    }
+    async destroy({auth, response, params}){
+        const user = await auth.getUser();
+        const {id} = params;
+        const proyecto = await Proyecto.find(id);
+
+        //return proyecto.user_id +"  " +user.id;
+        AutorizacionServices.verificarPermiso(proyecto,user);
+
+        await proyecto.delete();
         return proyecto;
     }
 
