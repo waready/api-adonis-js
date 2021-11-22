@@ -44,7 +44,7 @@ class TareaController {
         const tarea = await Tareas.find(id);
         const proyecto = await tarea.proyecto().fetch();
         AutorizacionServices.verificarPermiso(proyecto,user);
-        tarea.merge(request.only('description'));
+        tarea.merge(request.only('description')); //only []
         await tarea.save();
         return tarea;
     }
