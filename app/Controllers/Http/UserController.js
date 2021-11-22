@@ -5,7 +5,7 @@ class UserController {
 
     async store({request}){
         const {email, password} = request.all()
-        console.log(request.all())
+       // console.log(request.all())
         const user = await User.create({
             email,
             password,
