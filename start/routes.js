@@ -31,5 +31,11 @@ Route.group(()=>{
   Route.post('proyectos','ProyectoController.create').middleware('auth')
   Route.delete('proyectos/:id','ProyectoController.destroy').middleware('auth')
   Route.patch('proyectos/:id','ProyectoController.update').middleware('auth')
+  //tareas 
+  Route.post('proyectos/:id/tareas','TareaController.store').middleware('auth')
+  Route.get('proyectos/:id/tareas','TareaController.index').middleware('auth')
+
+  Route.delete('tareas/:id','TareaController.destroy').middleware('auth')
+  Route.patch('tareas/:id','TareaController.update').middleware('auth')
 }).prefix('api/v1')
 
